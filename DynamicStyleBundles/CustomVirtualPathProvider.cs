@@ -17,11 +17,11 @@
         private readonly int _cacheAbsoluteExpiration;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ContentVirtualPathProvider"/> class.
+        /// Initializes a new instance of the <see cref="CustomVirtualPathProvider"/> class.
         /// </summary>
         /// <param name="previous">The previous virtual path provider.</param>
         /// <param name="dynamicContentDirectory">The folder path containing dynamic content.</param>
-        /// <param name="contentRetrieverLocator">The content retriever service locator.</param>
+        /// <param name="assetLoaderLocator">The content retriever service locator.</param>
         /// <param name="cacheAbsoluteExpiration">The cache absolute expiration.</param>
         public CustomVirtualPathProvider(VirtualPathProvider previous, string dynamicContentDirectory, Func<IAssetLoader> assetLoaderLocator, int cacheAbsoluteExpiration)
         {
