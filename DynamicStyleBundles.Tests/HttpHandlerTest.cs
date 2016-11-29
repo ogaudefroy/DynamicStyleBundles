@@ -8,16 +8,30 @@
     using NUnit.Framework;
 
     [TestFixture]
-    public class DynamicContentHandlerTest
+    public class HttpHandlerTest
     {
+
         [Test]
-        public void DynamicContentHandler_Constructor_WithNullOrEmptyFallbackDirectoryName_Throws_ArgumentNullExcpetion([Values(null, "")] string value)
+        public void HttpHandler_Constructor_WithNullAssetLoarder_Throws_ArgumentNullExcpetion()
+        {
+            Assert.That(() => new HttpHandler(null, "ABC"), Throws.InstanceOf<ArgumentNullException>());
+        }
+
+        [Test]
+        public void HttpHandler_Constructor_WithNullOrEmptyFallbackDirectoryName_Throws_ArgumentNullExcpetion([Values(null, "")] string value)
         {
             Assert.That(() => new HttpHandler(() => new Mock<IAssetLoader>().Object, value), Throws.InstanceOf<ArgumentNullException>());
         }
 
         [Test]
-        public void DynamicContentHandler_NotRegisteredContentRetriever_Throws_NotSupportedException()
+        public void HttpHandler_IsReusable_Returns_True()
+        {
+            var handler = new HttpHandler(() => new Mock<IAssetLoader>().Object, "ABC");
+            Assert.That(handler.IsReusable, Is.True);
+        }
+
+        [Test]
+        public void HttpHandler_NotRegisteredContentRetriever_Throws_NotSupportedException()
         {
             var mockRequest = new Mock<HttpRequestBase>();
             mockRequest.SetupGet(r => r.Path).Returns("/Content/Images/picto/check.gif");
@@ -36,7 +50,7 @@
         }
 
         [Test]
-        public void DynamicContentHandler_NullContent_Returns_404()
+        public void HttpHandler_NullContent_Returns_404()
         {
             var mockRequest = new Mock<HttpRequestBase>();
             mockRequest.SetupGet(r => r.Path).Returns("/Content/Images/picto/check.gif");
@@ -55,7 +69,7 @@
         }
 
         [Test]
-        public void DynamicContentHandler_NotNullContent_ReturnsFile()
+        public void HttpHandler_NotNullContent_ReturnsFile()
         {
             AssertInconclusiveIfInDebugMode();
 
@@ -93,7 +107,7 @@
         }
 
         [Test]
-        public void DynamicContentHandler_GetContentByQueryString_ReturnsFile()
+        public void HttpHandler_GetContentByQueryString_ReturnsFile()
         {
             AssertInconclusiveIfInDebugMode();
 
