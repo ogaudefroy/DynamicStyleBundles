@@ -13,17 +13,7 @@
     {
         private readonly string _virtualDirectoryName;
         private static Func<IAssetLoader> _assetLoaderLocator;
-        public const string DYNAMICCONTENT_FOLDER = "DynamicContent";
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HttpHandler"/> class.
-        /// </summary>
-        /// <param name="assetLoaderLocator">The asset loader locator.</param>
-        public HttpHandler(Func<IAssetLoader> assetLoaderLocator)
-            : this(assetLoaderLocator, DYNAMICCONTENT_FOLDER)
-        {
-        }
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpHandler"/> class.
         /// </summary>
@@ -104,14 +94,10 @@
         }
 
         /// <summary>
-        /// The get http handler.
+        /// Returns the HTTP handler bound for this route (ie. itself).
         /// </summary>
-        /// <param name="requestContext">
-        /// The request context.
-        /// </param>
-        /// <returns>
-        /// The <see cref="IHttpHandler"/>.
-        /// </returns>
+        /// <param name="requestContext">The request context.</param>
+        /// <returns>The <see cref="IHttpHandler"/>.</returns>
         public IHttpHandler GetHttpHandler(RequestContext requestContext)
         {
             return this;
