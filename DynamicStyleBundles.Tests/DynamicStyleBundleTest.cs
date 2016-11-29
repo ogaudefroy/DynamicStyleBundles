@@ -91,7 +91,7 @@
             var response = bundle.GenerateBundleResponse(context);
 
             Assert.That(response.Cacheability, Is.EqualTo(HttpCacheability.Public));
-            Assert.That(response.ContentType, Is.EqualTo("text/css"));
+            Assert.That(response.ContentType, Is.Null);
             Assert.That(response.Content, Is.Empty);
             Assert.That(response.Files, Is.Not.Null);
             Assert.That(response.Files.Count(), Is.EqualTo(0));
