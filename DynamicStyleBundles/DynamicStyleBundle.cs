@@ -24,9 +24,19 @@
         /// Initializes a new instance of the <see cref="DynamicStyleBundle"/> class.
         /// </summary>
         /// <param name="virtualPath">The virtual path.</param>
+        public DynamicStyleBundle(string virtualPath, params IBundleTransform[] transforms)
+            : this(virtualPath, new DefaultCacheKeyGenerator(), new DefaultCacheToggleProvider(), transforms)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DynamicStyleBundle"/> class.
+        /// </summary>
+        /// <param name="virtualPath">The virtual path.</param>
         /// <param name="cdnPath">The cdn path.</param>
-        public DynamicStyleBundle(string virtualPath, string cdnPath)
-            : this(virtualPath, cdnPath, new DefaultCacheKeyGenerator(), new DefaultCacheToggleProvider())
+        /// <param name="transforms">The bundle transformers.</param>
+        public DynamicStyleBundle(string virtualPath, string cdnPath, params IBundleTransform[] transforms)
+            : this(virtualPath, cdnPath, new DefaultCacheKeyGenerator(), new DefaultCacheToggleProvider(), transforms)
         {
         }
 
@@ -36,8 +46,9 @@
         /// <param name="virtualPath">The virtual path.</param>
         /// <param name="cacheKeyGenerator">The implementation of cache key generator.</param>
         /// <param name="cacheToggleProvider">The implementation of cache toggle provider.</param>
-        public DynamicStyleBundle(string virtualPath, ICacheKeyGenerator cacheKeyGenerator, ICacheToggleProvider cacheToggleProvider)
-            : base(virtualPath)
+        /// <param name="transforms">The bundle transformers.</param>
+        public DynamicStyleBundle(string virtualPath, ICacheKeyGenerator cacheKeyGenerator, ICacheToggleProvider cacheToggleProvider, params IBundleTransform[] transforms)
+            : base(virtualPath, transforms)
         {
             if (cacheKeyGenerator == null)
             {
@@ -50,7 +61,7 @@
             _cacheKeyGenerator = cacheKeyGenerator;
             _cacheToggleProvider = cacheToggleProvider;
         }
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DynamicStyleBundle"/> class.
         /// </summary>
@@ -58,8 +69,9 @@
         /// <param name="cdnPath">The cdn path.</param>
         /// <param name="cacheKeyGenerator">The implementation of cache key generator.</param>
         /// <param name="cacheToggleProvider">The implementation of cache toggle provider.</param>
-        public DynamicStyleBundle(string virtualPath, string cdnPath, ICacheKeyGenerator cacheKeyGenerator, ICacheToggleProvider cacheToggleProvider)
-            : base(virtualPath, cdnPath)
+        /// <param name="transforms">The bundle transformers.</param>
+        public DynamicStyleBundle(string virtualPath, string cdnPath, ICacheKeyGenerator cacheKeyGenerator, ICacheToggleProvider cacheToggleProvider, params IBundleTransform[] transforms)
+            : base(virtualPath, cdnPath, transforms)
         {
             if (cacheKeyGenerator == null)
             {
