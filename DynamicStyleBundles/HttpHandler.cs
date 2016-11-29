@@ -18,9 +18,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpHandler"/> class.
         /// </summary>
-        /// <param name="contentRetrieverLocator">
-        /// The content Retriever Locator.
-        /// </param>
+        /// <param name="assetLoaderLocator">The asset loader locator.</param>
         public HttpHandler(Func<IAssetLoader> assetLoaderLocator)
             : this(assetLoaderLocator, DYNAMICCONTENT_FOLDER)
         {
@@ -29,7 +27,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpHandler"/> class.
         /// </summary>
-        /// <param name="contentRetrieverLocator">Function to retrieve the content</param>
+        /// <param name="assetLoaderLocator">Function to retrieve the content</param>
         /// <param name="virtualDirectoryName">The name of the dynamic content folder</param>
         public HttpHandler(Func<IAssetLoader> assetLoaderLocator, string virtualDirectoryName)
         {
