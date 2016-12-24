@@ -6,45 +6,45 @@
     using System.Web.Hosting;
 
     /// <summary>
-    /// Custom virtual path provider which handles specific directory containing DynamicContent.
-    /// If virtualPath starts with dynamicContentDirectory then Content is returned otherwise previous VirtualPathProvider is used.
+    /// Custom virtual path provider handling specific directory containing dynamic assets.
+    /// If virtualPath starts with dynamicAssetsDirectory value then asset is loaded and returned otherwise previous virtual path provider is used.
     /// </summary>
     public class CustomVirtualPathProvider : VirtualPathProvider
     {
         private readonly VirtualPathProvider _previous;
-        private readonly string _dynamicContentDirectory;
+        private readonly string _dynamicAssetsDirectory;
         private readonly Func<IAssetLoader> _assetLoaderLocator;
-        private readonly int _cacheAbsoluteExpiration;
+        private readonly ICacheDependencyBuilder _cacheDependencyBuilder;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomVirtualPathProvider"/> class.
         /// </summary>
         /// <param name="previous">The previous virtual path provider.</param>
-        /// <param name="dynamicContentDirectory">The folder path containing dynamic content.</param>
+        /// <param name="dynamicAssetsDirectory">The folder path containing dynamic assets.</param>
         /// <param name="assetLoaderLocator">The content retriever service locator.</param>
-        /// <param name="cacheAbsoluteExpiration">The cache absolute expiration.</param>
-        public CustomVirtualPathProvider(VirtualPathProvider previous, string dynamicContentDirectory, Func<IAssetLoader> assetLoaderLocator, int cacheAbsoluteExpiration)
+        /// <param name="cacheDependencyBuilder">A builder used to generate cache dependencies.</param>
+        public CustomVirtualPathProvider(VirtualPathProvider previous, string dynamicAssetsDirectory, Func<IAssetLoader> assetLoaderLocator, ICacheDependencyBuilder cacheDependencyBuilder)
         {
             if (previous == null)
             {
                 throw new ArgumentNullException("previous");
             }
-            if (string.IsNullOrEmpty(dynamicContentDirectory))
+            if (string.IsNullOrEmpty(dynamicAssetsDirectory))
             {
-                throw new ArgumentNullException("dynamicContentDirectory");
+                throw new ArgumentNullException("dynamicAssetsDirectory");
             }
             if (assetLoaderLocator == null)
             {
                 throw new ArgumentNullException("assetLoaderLocator");
             }
-            if (cacheAbsoluteExpiration < 1)
+            if (cacheDependencyBuilder == null)
             {
-                throw new ArgumentException("Cache expiration must be a postive integer.", "cacheAbsoluteExpiration");
+                throw new ArgumentNullException("cacheDependencyBuilder");
             }
             _previous = previous;
-            _dynamicContentDirectory = string.Format("~/{0}", dynamicContentDirectory);
+            _dynamicAssetsDirectory = string.Format("~/{0}", dynamicAssetsDirectory);
             _assetLoaderLocator = assetLoaderLocator;
-            _cacheAbsoluteExpiration = cacheAbsoluteExpiration;
+            _cacheDependencyBuilder = cacheDependencyBuilder;
         }
 
         /// <inheritdoc />
@@ -65,7 +65,7 @@
         {
             if (this.IsEmbeddedPath(virtualPath))
             {
-                return new TimeSpanCacheDependency(_cacheAbsoluteExpiration);
+                return _cacheDependencyBuilder.GetCacheDependency(virtualPath, virtualPathDependencies, utcStart);
             }
             return _previous.GetCacheDependency(virtualPath, virtualPathDependencies, utcStart);
         }
@@ -92,7 +92,7 @@
                 var content = assetLoader.Load(filePath);
                 return new CustomVirtualFile(virtualPath, content);
             }
-            return this._previous.GetFile(virtualPath);
+            return _previous.GetFile(virtualPath);
         }
 
         /// <summary>
@@ -102,7 +102,7 @@
         /// <returns>The <see cref="bool"/>.</returns>
         private bool IsEmbeddedPath(string path)
         {
-            return path.StartsWith(this._dynamicContentDirectory, StringComparison.OrdinalIgnoreCase);
+            return path.StartsWith(_dynamicAssetsDirectory, StringComparison.OrdinalIgnoreCase);
         }
     }
 }
