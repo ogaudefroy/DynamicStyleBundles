@@ -1,6 +1,5 @@
 ﻿namespace DynamicStyleBundles
 {
-
     /// <summary>
     /// Interface describing the contract to implement in order to retrieve dynamically an asset from an URI segment (/picto/check.gif).
     /// </summary>

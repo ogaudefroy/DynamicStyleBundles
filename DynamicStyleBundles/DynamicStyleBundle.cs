@@ -94,7 +94,7 @@
         /// <inheritdoc />
         public override void UpdateCache(BundleContext context, BundleResponse response)
         {
-            if (!this._cacheToggleProvider.IsCacheEnabled)
+            if (!_cacheToggleProvider.IsCacheEnabled)
             {
                 return;
             }
@@ -104,7 +104,7 @@
         /// <inheritdoc />
         public override BundleResponse CacheLookup(BundleContext context)
         {
-            if (!this._cacheToggleProvider.IsCacheEnabled)
+            if (!_cacheToggleProvider.IsCacheEnabled)
             {
                 return null;
             }
