@@ -83,7 +83,7 @@
             var assetLoader = _assetLoaderLocator();
             if (assetLoader == null)
             {
-                throw new NotSupportedException("Unable to get a not null instance of IContentRetriever.");
+                throw new NotSupportedException("Unable to get a not null instance of IAssetLoader.");
             }
 
             var asset = assetLoader.Load(filePath);

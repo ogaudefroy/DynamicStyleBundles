@@ -46,7 +46,7 @@
             var handler = new HttpHandler(() => null, "Content");
             Assert.That(
                 () => handler.ProcessRequestInternal(mockCtx.Object),
-                Throws.InstanceOf<NotSupportedException>().With.Message.EqualTo("Unable to get a not null instance of IContentRetriever."));
+                Throws.InstanceOf<NotSupportedException>().With.Message.EqualTo("Unable to get a not null instance of IAssetLoader."));
         }
 
         [Test]
