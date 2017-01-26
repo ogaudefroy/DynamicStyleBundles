@@ -88,7 +88,7 @@
             if (this.IsEmbeddedPath(virtualPath))
             {
                 var assetLoader = _assetLoaderLocator();
-                var filePath = virtualPath.Substring(virtualPath.IndexOf(_dynamicContentDirectory, StringComparison.CurrentCultureIgnoreCase) + _dynamicContentDirectory.Length);
+                var filePath = virtualPath.Substring(virtualPath.IndexOf(_dynamicAssetsDirectory, StringComparison.CurrentCultureIgnoreCase) + _dynamicAssetsDirectory.Length);
                 var content = assetLoader.Load(filePath);
                 return new CustomVirtualFile(virtualPath, content);
             }
