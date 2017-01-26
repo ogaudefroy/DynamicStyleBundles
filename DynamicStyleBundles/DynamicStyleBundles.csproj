@@ -73,7 +73,9 @@
     <Compile Include="DefaultCacheKeyGenerator.cs" />
     <Compile Include="DefaultCacheToggleProvider.cs" />
     <Compile Include="DynamicStyleBundle.cs" />
+    <Compile Include="HttpHandlerConfiguration.cs" />
     <Compile Include="HttpHandler.cs" />
+    <Compile Include="HttpHandlerFactory.cs" />
     <Compile Include="ICacheDependencyBuilder.cs" />
     <Compile Include="ICacheKeyGenerator.cs" />
     <Compile Include="ICacheToggleProvider.cs" />

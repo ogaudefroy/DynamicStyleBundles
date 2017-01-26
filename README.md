@@ -7,12 +7,25 @@ A lightweight library which simplifies dynamic assets bundling via System.Web.Op
  - Feature toggled cached bundling 
  - Supports cache dependencies
  - Multi tenancy support
+ 
+## Getting up and running
+### Install
+Install the nuget package ; the setup will add the reference and will tweak your web.config file to add a brand new handler definition.
+
+```<add name="DynamicStyleBundles" path="DynamicContent/*" verb="GET" type="DynamicStyleBundles.HttpHandlerFactory, DynamicStyleBundles" preCondition="integratedMode" />`
+
+### Configure the HttpHandler
+
+ 1. Modify the handler's path to match your needs
+
+### Bundle Setup
 
 ### Registering your dynamic assets
 Replace your StyleBundle instantiations by DynamicStyleBundle instantiations and you're up and running to deliver dynamic assets. 
 
 DynamicStyleBundle do support CDN, transforms but also multi tenancy design and feature toggle caching (see below).
 
+## Advanced scenarios  
 ###Feature toggled cached bundling
 A common scenario when building white label sites is the capability to provide a UI where technical users can update stylesheets, images and fonts. As a consequence when applying dynamic assets bundling it can be very convenient to temporary disable the bundling only for a specific user in order to test its updates.
 

@@ -13,6 +13,23 @@
     {
         private readonly string _virtualDirectoryName;
         private static Func<IAssetLoader> _assetLoaderLocator;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HttpHandler"/> class using the current registered configuration.
+        /// </summary>
+        public HttpHandler()
+            : this(HttpHandlerConfiguration.Current)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HttpHandler"/> class using the provided configuration.
+        /// </summary>
+        /// <param name="config">The provided HTTP handler configuration.</param>
+        public HttpHandler(HttpHandlerConfiguration config) 
+            : this(config.AssetLoaderFuncter, config.VirtualPath)
+        {
+        }
         
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpHandler"/> class.
