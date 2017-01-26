@@ -8,8 +8,10 @@ A lightweight library which simplifies dynamic assets bundling via System.Web.Op
  - Supports cache dependencies
  - Multi tenancy support
 
-
 ### Registering your dynamic assets
+Replace your StyleBundle instantiations by DynamicStyleBundle instantiations and you're up and running to deliver dynamic assets. 
+
+DynamicStyleBundle do support CDN, transforms but also multi tenancy design and feature toggle caching (see below).
 
 ###Feature toggled cached bundling
 A common scenario when building white label sites is the capability to provide a UI where technical users can update stylesheets, images and fonts. As a consequence when applying dynamic assets bundling it can be very convenient to temporary disable the bundling only for a specific user in order to test its updates.
