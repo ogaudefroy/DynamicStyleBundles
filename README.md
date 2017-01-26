@@ -14,16 +14,16 @@ A lightweight library which simplifies dynamic assets bundling via System.Web.Op
 ###Feature toggled cached bundling
 A common scenario when building white label sites is the capability to provide a UI where technical users can update stylesheets, images and fonts. As a consequence when applying dynamic assets bundling it can be very convenient to temporary disable the bundling only for a specific user in order to test its updates.
 
-This library implements this requirement with the ICacheToggleProvider interface which creates an extensibility point where you can implement your own feature toggle logic.
+This library implements this requirement with the [ICacheToggleProvider](https://github.com/ogaudefroy/DynamicStyleBundles/blob/master/DynamicStyleBundles/ICacheToggleProvider.cs) interface which creates an extensibility point where you can implement your own feature toggle logic.
 
-A default toggle provider is provided if no provider is registered with the bundle: DefaultCacheToggleProvider which always activates caching.
+A default toggle provider is provided if no provider is registered with the bundle: [DefaultCacheToggleProvider](https://github.com/ogaudefroy/DynamicStyleBundles/blob/master/DynamicStyleBundles/DefaultCacheToggleProvider.cs) which always activates caching.
 
 ###Multi tenancy support
-By default DynamicStyleBundles supports multitenancy through its caching mechanism which generates caching keys prefixed with HTTP_HOST server variable. This behavior is implemented in DefaultCacheKeyGenerator class. 
+By default DynamicStyleBundles supports multitenancy through its caching mechanism which generates caching keys prefixed with HTTP_HOST server variable. This behavior is implemented in [DefaultCacheKeyGenerator](https://github.com/ogaudefroy/DynamicStyleBundles/blob/master/DynamicStyleBundles/DefaultCacheKeyGenerator.cs) class. 
 
-If this design doesn't match your use case you can create your own cache key generator by implementing ICacheKeyGenerator and registering your implementation when instantiating your DynamicStyleBundle.
+If this design doesn't match your use case you can create your own cache key generator by implementing [ICacheKeyGenerator](https://github.com/ogaudefroy/DynamicStyleBundles/blob/master/DynamicStyleBundles/ICacheKeyGenerator.cs) and registering your implementation when instantiating your DynamicStyleBundle.
 
 ###Cache dependencies
-It can also be very convenient to be able to automatically refresh your bundle when an asset is edited. By default, DynamicStyleBundles provides a TimeSpanCacheDependency which expires after 15 minutes. 
+It can also be very convenient to be able to automatically refresh your bundle when an asset is edited. By default, DynamicStyleBundle provides a [TimeSpanCacheDependency](https://github.com/ogaudefroy/DynamicStyleBundles/blob/master/DynamicStyleBundles/TimeSpanCacheDependency.cs) which expires after 15 minutes. 
 
-You can provide an alternate implementation by implementing the ICacheDependencyBuilder interface and register it when setting the virtual path provider.
+You can provide an alternate implementation by implementing the [ICacheDependencyBuilder](https://github.com/ogaudefroy/DynamicStyleBundles/blob/master/DynamicStyleBundles/ICacheDependencyBuilder.cs) interface and register it when setting the virtual path provider.
