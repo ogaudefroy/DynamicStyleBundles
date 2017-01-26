@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://github.com/ogaudefroy/DynamicStyleBundles</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A lightweight library which simplifies dynamic assets bundling via System.Web.Optimization</description>
+    <tags>asp.net whitelabel bundling dynamic assets</tags>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+  </metadata>
+</package>
