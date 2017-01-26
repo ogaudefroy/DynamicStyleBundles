@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomVirtualFileTest.cs" />
+    <Compile Include="DefaultCacheDependencyBuilderTest.cs" />
     <Compile Include="DefaultCacheKeyGeneratorTest.cs" />
     <Compile Include="DefaultCacheToggleProviderTest.cs" />
     <Compile Include="DynamicStyleBundleTest.cs" />

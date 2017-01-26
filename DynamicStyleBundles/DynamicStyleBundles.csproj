@@ -69,6 +69,7 @@
     <Compile Include="Asset.cs" />
     <Compile Include="CustomVirtualFile.cs" />
     <Compile Include="CustomVirtualPathProvider.cs" />
+    <Compile Include="DefaultCacheDependencyBuilder.cs" />
     <Compile Include="DefaultCacheKeyGenerator.cs" />
     <Compile Include="DefaultCacheToggleProvider.cs" />
     <Compile Include="DynamicStyleBundle.cs" />
