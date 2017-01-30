@@ -12,7 +12,7 @@ A lightweight library which simplifies dynamic assets bundling via System.Web.Op
 ### Install
 Install the nuget package ; the setup will add the reference and will tweak your web.config file to add a brand new handler definition.
 
-```<add name="DynamicStyleBundles" path="DynamicContent/*" verb="GET" type="DynamicStyleBundles.HttpHandlerFactory, DynamicStyleBundles" preCondition="integratedMode" />`
+`<add name="DynamicStyleBundles" path="DynamicContent/*" verb="GET" type="DynamicStyleBundles.HttpHandlerFactory, DynamicStyleBundles" preCondition="integratedMode" />`
 
 ### Configure the HttpHandler
 
