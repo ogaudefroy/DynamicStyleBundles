@@ -18,9 +18,7 @@ Install the nuget package ; the setup will add the reference and will tweak your
 
  1. Modify the handler's path to match your needs
 
-### Bundle Setup
-
-### Registering your dynamic assets
+### Registering your dynamic bundles
 Replace your StyleBundle instantiations by DynamicStyleBundle instantiations and you're up and running to deliver dynamic assets. 
 
 DynamicStyleBundle do support CDN, transforms but also multi tenancy design and feature toggle caching (see below).
