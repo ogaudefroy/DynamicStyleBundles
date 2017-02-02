@@ -18,7 +18,7 @@
         /// Initializes a new instance of the <see cref="HttpHandler"/> class using the current registered configuration.
         /// </summary>
         public HttpHandler()
-            : this(HttpHandlerConfiguration.Current)
+            : this(DynamicStyleBundlesConfig.Current)
         {
         }
 
@@ -26,7 +26,7 @@
         /// Initializes a new instance of the <see cref="HttpHandler"/> class using the provided configuration.
         /// </summary>
         /// <param name="config">The provided HTTP handler configuration.</param>
-        public HttpHandler(HttpHandlerConfiguration config) 
+        public HttpHandler(DynamicStyleBundlesConfig config) 
             : this(config.AssetLoaderFuncter, config.VirtualPath)
         {
         }
