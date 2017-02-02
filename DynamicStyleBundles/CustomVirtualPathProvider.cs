@@ -12,7 +12,7 @@
     public class CustomVirtualPathProvider : VirtualPathProvider
     {
         private readonly VirtualPathProvider _previous;
-        private readonly string _dynamicAssetsDirectory;
+        private readonly string _dynamicAssetsVirtualPath;
         private readonly Func<IAssetLoader> _assetLoaderLocator;
         private readonly ICacheDependencyBuilder _cacheDependencyBuilder;
 
@@ -22,16 +22,28 @@
         /// <param name="previous">The previous virtual path provider.</param>
         /// <param name="dynamicAssetsDirectory">The folder path containing dynamic assets.</param>
         /// <param name="assetLoaderLocator">The content retriever service locator.</param>
+        /// <remarks>Cache dependency builder used will be DefaultCacheDependencyBuilder.</remarks>
+        public CustomVirtualPathProvider(VirtualPathProvider previous, string dynamicAssetsDirectory, Func<IAssetLoader> assetLoaderLocator)
+            : this(previous, dynamicAssetsDirectory, assetLoaderLocator, new DefaultCacheDependencyBuilder())
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CustomVirtualPathProvider"/> class.
+        /// </summary>
+        /// <param name="previous">The previous virtual path provider.</param>
+        /// <param name="dynamicAssetsVirtualPath">The virtual path containing dynamic assets.</param>
+        /// <param name="assetLoaderLocator">The content retriever service locator.</param>
         /// <param name="cacheDependencyBuilder">A builder used to generate cache dependencies.</param>
-        public CustomVirtualPathProvider(VirtualPathProvider previous, string dynamicAssetsDirectory, Func<IAssetLoader> assetLoaderLocator, ICacheDependencyBuilder cacheDependencyBuilder)
+        public CustomVirtualPathProvider(VirtualPathProvider previous, string dynamicAssetsVirtualPath, Func<IAssetLoader> assetLoaderLocator, ICacheDependencyBuilder cacheDependencyBuilder)
         {
             if (previous == null)
             {
                 throw new ArgumentNullException("previous");
             }
-            if (string.IsNullOrEmpty(dynamicAssetsDirectory))
+            if (string.IsNullOrEmpty(dynamicAssetsVirtualPath))
             {
-                throw new ArgumentNullException("dynamicAssetsDirectory");
+                throw new ArgumentNullException("dynamicAssetsVirtualPath");
             }
             if (assetLoaderLocator == null)
             {
@@ -42,7 +54,7 @@
                 throw new ArgumentNullException("cacheDependencyBuilder");
             }
             _previous = previous;
-            _dynamicAssetsDirectory = string.Format("~/{0}", dynamicAssetsDirectory);
+            _dynamicAssetsVirtualPath = dynamicAssetsVirtualPath;
             _assetLoaderLocator = assetLoaderLocator;
             _cacheDependencyBuilder = cacheDependencyBuilder;
         }
@@ -88,7 +100,7 @@
             if (this.IsEmbeddedPath(virtualPath))
             {
                 var assetLoader = _assetLoaderLocator();
-                var filePath = virtualPath.Substring(virtualPath.IndexOf(_dynamicAssetsDirectory, StringComparison.CurrentCultureIgnoreCase) + _dynamicAssetsDirectory.Length);
+                var filePath = virtualPath.Substring(virtualPath.IndexOf(_dynamicAssetsVirtualPath, StringComparison.CurrentCultureIgnoreCase) + _dynamicAssetsVirtualPath.Length);
                 var content = assetLoader.Load(filePath);
                 return new CustomVirtualFile(virtualPath, content);
             }
@@ -102,7 +114,7 @@
         /// <returns>The <see cref="bool"/>.</returns>
         private bool IsEmbeddedPath(string path)
         {
-            return path.StartsWith(_dynamicAssetsDirectory, StringComparison.OrdinalIgnoreCase);
+            return path.StartsWith(_dynamicAssetsVirtualPath, StringComparison.OrdinalIgnoreCase);
         }
     }
 }
