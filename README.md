@@ -31,12 +31,12 @@ This library implements this requirement with the [ICacheToggleProvider](https:/
 
 A default toggle provider is provided if no provider is registered with the bundle: [DefaultCacheToggleProvider](https://github.com/ogaudefroy/DynamicStyleBundles/blob/master/DynamicStyleBundles/DefaultCacheToggleProvider.cs) which always activates caching.
 
-###Multi tenancy support
+### Multi tenancy support
 By default DynamicStyleBundles supports multitenancy through its caching mechanism which generates caching keys prefixed with HTTP_HOST server variable. This behavior is implemented in [DefaultCacheKeyGenerator](https://github.com/ogaudefroy/DynamicStyleBundles/blob/master/DynamicStyleBundles/DefaultCacheKeyGenerator.cs) class. 
 
 If this design doesn't match your use case you can create your own cache key generator by implementing [ICacheKeyGenerator](https://github.com/ogaudefroy/DynamicStyleBundles/blob/master/DynamicStyleBundles/ICacheKeyGenerator.cs) and registering your implementation when instantiating your DynamicStyleBundle.
 
-###Cache dependencies
+### Cache dependencies
 It can also be very convenient to be able to automatically refresh your bundle when an asset is edited. By default, DynamicStyleBundle provides a [TimeSpanCacheDependency](https://github.com/ogaudefroy/DynamicStyleBundles/blob/master/DynamicStyleBundles/TimeSpanCacheDependency.cs) which expires after 15 minutes. 
 
 You can provide an alternate implementation by implementing the [ICacheDependencyBuilder](https://github.com/ogaudefroy/DynamicStyleBundles/blob/master/DynamicStyleBundles/ICacheDependencyBuilder.cs) interface and register it when setting the virtual path provider.
