@@ -17,14 +17,16 @@ Install the nuget package ; the setup will add the reference and will tweak your
 ### Configure the HttpHandler
 
  1. Modify the handler's path to match your needs
-
+ 2.
+ 3.
+ 
 ### Registering your dynamic bundles
 Replace your StyleBundle instantiations by DynamicStyleBundle instantiations and you're up and running to deliver dynamic assets. 
 
 DynamicStyleBundle do support CDN, transforms but also multi tenancy design and feature toggle caching (see below).
 
 ## Advanced scenarios  
-###Feature toggled cached bundling
+### Feature toggled cached bundling
 A common scenario when building white label sites is the capability to provide a UI where technical users can update stylesheets, images and fonts. As a consequence when applying dynamic assets bundling it can be very convenient to temporary disable the bundling only for a specific user in order to test its updates.
 
 This library implements this requirement with the [ICacheToggleProvider](https://github.com/ogaudefroy/DynamicStyleBundles/blob/master/DynamicStyleBundles/ICacheToggleProvider.cs) interface which creates an extensibility point where you can implement your own feature toggle logic.
