@@ -14,11 +14,15 @@ Install the nuget package ; the setup will add the reference and will tweak your
 
 `<add name="DynamicStyleBundles" path="DynamicContent/*" verb="GET" type="DynamicStyleBundles.HttpHandlerFactory, DynamicStyleBundles" preCondition="integratedMode" />`
 
-### Configure the HttpHandler
+### Configure your application
 
  - Modify the handler's path to match your needs
- -
- -
+ - Implement [IAssetLoader](https://github.com/ogaudefroy/DynamicStyleBundles/blob/master/DynamicStyleBundles/IAssetLoader.cs) interface to retrieve your assets from your datastore.
+ - In your Application_Start method register your configuration.
+ ```
+DynamicStyleBundlesConfig.Current = new DynamicStyleBundlesConfig(() => GetAssetLoader(), "~/DynamicContent");
+DynamicStyleBundlesConfig.Current.ApplyConfig();
+ ```
  
 ### Registering your dynamic bundles
 Replace your StyleBundle instantiations by DynamicStyleBundle instantiations and you're up and running to deliver dynamic assets. 
