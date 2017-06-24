@@ -1,5 +1,5 @@
 # DynamicStyleBundles
-A lightweight library which simplifies dynamic assets bundling via System.Web.Optimization  
+A lightweight library which simplifies dynamic assets bundling via System.Web.Optimization for ASP.Net whitelabel sites. 
 [![Build status](https://ci.appveyor.com/api/projects/status/95u4qhpatb3kvj7m/branch/master?svg=true)](https://ci.appveyor.com/project/ogaudefroy/dynamicstylebundles/branch/master)
 
 ## Core Features
@@ -16,9 +16,9 @@ Install the nuget package ; the setup will add the reference and will tweak your
 
 ### Configure the HttpHandler
 
- 1. Modify the handler's path to match your needs
- 2.
- 3.
+ - Modify the handler's path to match your needs
+ -
+ -
  
 ### Registering your dynamic bundles
 Replace your StyleBundle instantiations by DynamicStyleBundle instantiations and you're up and running to deliver dynamic assets. 
